@@ -5,6 +5,10 @@
 ; Notepad will save UTF-8 files with BOM automatically (even though it does not say so).
 ; Some editors however save without BOM, and then special characters look messed up in the AHK GUI.
 
+
+
+
+
 ;-------------------------------------------------------------------------------
 ; AUTO EXECUTE
 ;-------------------------------------------------------------------------------
@@ -28,6 +32,20 @@ gui_autoexecute:
 
     ; Initialize variable to keep track of the state of the GUI
     gui_state = closed
+	
+	; Intialize own variables to use it afterwards
+	activeWindowClass = 
+	List = 
+    prevActiveWindow = 
+	
+	; Specialed Config
+	MouseDistance = 200
+	KeyWaitTime = 400
+	LeadKeyOne = {End}
+	LeadKeyTwo = Home
+	TextEditor = "C:\Program Files (x86)\Vim\vim82\vim.exe"
+	FireFoxExe="C:\Program Files\Mozilla Firefox\firefox.exe"
+
 
     ; Initialize search_urls as a variable set to zero
     search_urls := 0
@@ -38,9 +56,13 @@ gui_autoexecute:
 ;-------------------------------------------------------------------------------
 CapsLock & Space::
 gui_spawn:
+	; get class before GUI is opened
+	WinGetClass, activeWindowClass, A
+	
+	; open / close GUI
     if gui_state != closed
     {
-        ; If the GUI is already open, close it.
+        ; If the GUI is already open, close it. 
         gui_destroy()
         return
     }
@@ -63,6 +85,7 @@ gui_spawn:
 ; Automatically triggered on Escape key:
 GuiEscape:
     gui_destroy()
+    search_urls := 0
     return
 
 ; The callback function when the text changes in the input field.
@@ -84,6 +107,7 @@ gui_destroy() {
     ; in case the next search does not set its own:
     gui_search_title =
 
+
     ; Clear the tooltip
     Gosub, gui_tooltip_clear
 
@@ -91,7 +115,7 @@ gui_destroy() {
     Gui, Destroy
 
     ; Bring focus back to another window found on the desktop
-    WinActivate
+    WinActivate, activeWindowClass
 }
 
 gui_change_title(message,color = "") {
@@ -108,6 +132,8 @@ gui_change_title(message,color = "") {
     Gui, Font, s10 cffffff ; reset
 }
 
+
+
 ;-------------------------------------------------------------------------------
 ; SEARCH ENGINES
 ;-------------------------------------------------------------------------------
@@ -120,6 +146,46 @@ gui_search_add_elements:
     Gui, Add, Button, x-10 y-10 w1 h1 +default ggui_SearchEnter ; hidden button
     GuiControl, Disable, Pedersen
     Gui, Show, AutoSize
+    return
+
+gui_add_dropdown_projects:
+    Gui, Add, Text, %gui_control_options% %cYellow%, %gui_search_title%
+	; use dropdown
+	; Gui, Add, DropDownList, %gui_control_options% %cYellow% vList, 7S|SCS|SiLKe
+	; use free text
+	Gui, Add, Edit, %gui_control_options% %cYellow% vList -WantReturn
+    Gui, Add, Button, x-10 y-10 w1 h1 +default ggui_enter_project ; hidden button
+    GuiControl, Disable, Pedersen
+    Gui, Show, AutoSize
+    return
+	
+gui_enter_project:
+	OnSelect:
+	Gui, Submit, nohide
+	gui_destroy()
+	;Parse a comma separated value (CSV) file:
+	Loop, read, %A_ScriptDir%\Miscellaneous\folders.csv
+	{
+		LineNumber = %A_Index%
+		Loop, parse, A_LoopReadLine, CSV
+		{
+			; save all column values to Field1, Field2, ...
+			Field%A_Index% := A_LoopField
+		}
+		If (Field1 == List)
+		{
+			; MsgBox, %List% == %Field1%, %Field2% 
+			folder = %Field2%
+			Loop, %search_urls%
+			{
+				StringReplace, search_final_url, search_url%A_Index%, REPLACEME, %folder%	
+				run %search_final_url%	  
+			}
+			search_urls := 0
+		}
+		; else
+			; MsgBox, test
+	}
     return
 
 gui_search(url) {
@@ -151,6 +217,27 @@ gui_SearchEnter:
     search_urls := 0
     return
 
+gui_projectsearch(url) {
+    global
+    if gui_state != search
+    {
+        gui_state = search
+        ; if gui_state is "main", then we are coming from the main window and
+        ; GUI elements for the search field have not yet been added.
+        Gosub, gui_add_dropdown_projects        
+
+    }
+
+    ; Assign the url to a variable.
+    ; The variables will have names search_url1, search_url2, ...
+
+    search_urls := search_urls + 1
+    search_url%search_urls% := url
+}
+
+
+
+	
 ;-------------------------------------------------------------------------------
 ; TOOLTIP
 ; The tooltip shows all defined commands, along with a description of what

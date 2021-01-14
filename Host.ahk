@@ -27,3 +27,9 @@ return
 
 ; General settings
 #Include %A_ScriptDir%\Miscellaneous\miscellaneous.ahk
+
+; Load shortcuts
+#Include %A_ScriptDir%\shortcuts\programs.ahk
+#Include %A_ScriptDir%\shortcuts\programs2.ahk
+#Include %A_ScriptDir%\shortcuts\screenManagement.ahk
+#Include %A_ScriptDir%\shortcuts\screenManagement2.ahk

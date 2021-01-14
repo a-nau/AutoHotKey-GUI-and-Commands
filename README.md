@@ -1,112 +1,113 @@
-### What it is
-This is a small GUI that allows you to run any normal AutoHotkey command or block of code by typing a name for the command you want to run. I wrote this script because I was creating more and more hotkeys for various things, but I ran out of keys on my keyboard to assign hotkeys to. It is designed to be as minimal as possible.
+# AutoHotKey GUI and Commands
 
-![Screenshot](/img/ahk_launcher.png "Screenshot of the GUI")
+This project is a modified version of [Public-AutoHotKey-Scripts](https://github.com/plul/Public-AutoHotKey-Scripts) by [Asger Juul Brunshøj](https://github.com/plul).
+Also check the original [readme](/Miscellaneous/README_original.md) for more information.
 
-### How to use it
-Run the `Host.ahk` file.
+## [Why](https://www.lifehack.org/articles/featured/10-ways-to-use-autohotkey-to-rock-your-keyboard.html) use AHK? 
 
-This entire script is build around the `CapsLock` key.
-The GUI is activated by `CapsLock`+`Space`.
-Normal `CapsLock` functionality is preserved, and can be toggled by `Alt`+`CapsLock`.
+Using your keyboard more and your mouse less improves your productivity, since it usually takes you much less time.
 
-When typing something in the GUI, whatever you type is matched up against the commands in `UserCommands.ahk`. These are normal AutoHotkey commands so you can and should write your own. I have supplied some sample commands to show some ideas. But it only becomes truly powerful once you customize it with commands to suit your specific needs.
+Check the following Demo: Instead of 
+- using your mouse to opening FireFox, 
+- opening a new tab and 
+- typing `www.google.com`
 
-##### Trying it out yourself
-1. Make sure `Host.ahk` is running.
-* Open the GUI with `CapsLock`+`Space`.
-* Type `face` into the GUI to open facebook.com.
-* Open the GUI again. Type `note` into the GUI to open Notepad.
-* While in Notepad, type `@` into the GUI. It will write your e-mail address (but you need to go into `UserCommands.ahk` later to specify your own address).
-* Try typing `down` into the GUI to open your Downloads folder or `rec` to open the Recycle Bin.
-* You can search google by typing `g` followed by a space. A new input field should appear. Type your search query and press enter. Use `l ` if you are 'Feeling Lucky'.
-* You can search Youtube with `y `, search Facebook with `f ` or the torrent networks with `t `.
-* If you like Reddit, you can visit a specific subreddit by typing `/` into the GUI and then the name of the subreddit you have in mind.
-* Try `week` or `date`. (I can never remember the week number so this is useful when on the phone with somebody who insists on comparing calendars going by week number).
-* Type `ping` into the GUI to quickly ping www.google.com to see if your internet connection works.
+you just press 
+- `CAPSLOCK`+`SPACE` and then
+- `g`+`SPACE` 
 
-There are some additional example commands included. Try typing simply `?`, and you should see a tooltip with all defined commands and a description of what they do. You may also explore all the sample commands in detail by looking in `UserCommands.ahk`. Now it is time for you to start filling in your own personalized commands.
+(the demo below also shows the `?` command that displays the available options) 
 
-My own personal `UserCommands.ahk` file is huge, but it is tailored to the things I do everyday and would not be much use for anybody else.
+<img src="./img/presentation.gif">
 
-##### How to write your own commands
-The variable `Pedersen` contains your text from the input field.
 
-The first thing to do is often to hide the GUI and reset the input field. Do this by calling `gui_destroy()`.
+## Features
+There are numerous other features already implemented, ready to use! 
+Always first start the GUI with `CAPSLOCK`+`SPACE` and then choose:
+- Search dialogues to quickly search across different sites (always press the key and `SPACE` afterwards)
+    - `a`: Amazon
+    - `d`: DuckDuckGo
+    - `g`: Google
+    - `gs`: Google Scholar
+    - `i`: Google Images
+    - `l`: Google I'm feeling lucky
+    - `m`: Google Maps
+    - `w`: Weather search
+    - `x`: Google in Incognito mode
+    - `y`: YouTube
+    - `/`: Go to Sub-Reddit
+- Translation (additional configuration/changes are possible)
+    - `teng`: Translate from German to English
+    - `tger`: Translate from English to German
+- Pasting of strings with `name`, `phone` (can configure anything)
+- Opening of folders and files
+    - `down`: opens Downloads folder
+    - `f`+`SPACE`: opens dialog for shortcuts to folders (configuration in [`folders.csv`](/Miscellaneous/folders.csv))
+    - `rec`: open recycle bin
+    - `shortcuts`: opens file containing additional application specific shortcuts
+- Miscellaneous
+    - `date`: prompts today's date
+    - `url`: open browser and load content of clipboard (opens webpage if it is a URL, otherwise opens standard search)
+    - `week`: prompts the current week
+    - `?`: overview of available commands
 
-After that, you can run any normal AHK block of code. If for example you have some program you use all the time, you can create a shortcut to that program by
 
-    else if Pedersen = prog
-    {
-        gui_destroy()
-        run "C:\Program Files\Company\That awesome program.exe"
-    }
+In addition you can specify hot keys for applications in the directory [shortcuts](./shortcuts), that open applications when combining a lead key (default is `End`) with another key.
+For example `End` + `G` opens the windows file explorer.
 
-That's it! now you can launch your favourite program by typing `prog` into the input field.
+## Usage
 
-There is a function, `gui_search(url)`, defined in this script that you can call if you want to search some specific website. So for example if you translate from English to Korean using Google Translate all the time, and you want a shortcut for that, then the way to go about it is the following:
+If you are new to AHK, check out the following [description](https://en.wikipedia.org/wiki/AutoHotkey) and short [tutorial](https://www.autohotkey.com/docs/Tutorial.htm).
 
-1. Go to Google Translate.
-* Translate something. For example try translating `Winged turtle`.
-* Google Translate tells you that a winged turtle would be 날개 달린 거북이 in Korean. But the URL is the interesting part. The URL is `https://translate.google.com/#en/ko/winged%20turtle`.
-* Replace your query with the word `REPLACEME`. Like this: `https://translate.google.com/#en/ko/REPLACEME`.
-* Then the code could be:
+To get started
+- install [AutoHotKey](https://autohotkey.com/download/) (AHK)
+- execute `Host.ahk` (by double clicking)
 
-        else if Pedersen = kor ; Translate English to Korean
-        {
-            gui_search_title = English to Korean
-            gui_search("https://translate.google.com/#en/ko/REPLACEME")
-        }
+Specify the path to your favorite
+- text editor (that opens all text files) in the variable [`TextEditor`](./GUI/GUI.ahk#L46) 
+- browser (that opens all searches and links) in the variable [`FireFoxExe`](./GUI/GUI.ahk#L47)
 
-Now we can translate from English to Korean in a heartbeat.
+To start the GUI use `CAPSLOCK + SPACE` and enter `?` to get an overview of available commands.
+Since `CAPSLOCK` is used as a special key, its standard usage is suppressed, but can be recovered using `ALT + CAPSLOCK`.
 
-### How it works
-Disclaimer: Initially, this was not really written to be shared or used by others, so it is not properly documented and some of the variable names are not self-explanatory and some are in danish. I'm sorry about that. However if you don't go digging too deep, you should not get in trouble. The `UserCommands.ahk` file should be easy to edit.
+In addition you can specify hot keys for applications and windows management in the directory [shortcuts](./shortcuts), where you find more details.
+The default lead keys are `Home` and `End`.
+To get back their original functionality you need to double press them.
 
-Here are some quick tips about the script and how it works:
+## Credits
+Without the great original [repo](https://github.com/plul/Public-AutoHotKey-Scripts), this would not have been possible, since I am not a AHK expert.
+In the following you find a short overview of my changes.
+### Original version
+- very cool GUI that constitutes the heart of the application
+- very quick search on several platforms (google, duckduckgo, ...)
+- translation between languages
+- and more features (paste strings, get week, ...)
 
-##### Function `gui_destroy()`
-Hides and resets the GUI window.
+### Extension from Original
+I customized the GUI commands to serve my needs, so there are substantial differences between the original version and this one. 
+Information for further customization can be found in [GUI](./GUI).
 
-##### Function `gui_search(url)`
-`gui_search(url)` was made to search websites like Google and Reddit and so on. It will make a new text input field in the GUI where you can type your search query.
-Then it will look at the supplied URL and find 'REPLACEME' and replace it
-with your search query.
-Example:
+In addition to that I added:
+- shortcuts for programs and screen management
+    - routines to open or activate (if already open) a program
+    - screen management shortcuts, such as switching between desktops and moving applications across screens
+- [`folders.csv`](./Miscellaneous/folders.csv) where you can specify "keyword - folder path" pairs to open specific folders quickly from within the GUI
+- routine to save the URL of the current active tab of Firefox from any application to clipboard
+- a very uncomplete [list](./Miscellaneous/Shortcuts.md) of common shortcuts within certain applications I use
 
-    else if Pedersen = y%A_Space% ; Search Youtube
-    {
-        gui_search_title = Youtube
-        gui_search("https://www.youtube.com/results?search_query=REPLACEME")
-    }
 
-### What is in store for the future
-There has been interest from a number of people in this script, and every once in a while I get a shoutout or a message on reddit from someone who found it and fell in love with it. That warms my heart, so I plan to clean it up completely one day. I also have some other AHK tricks that my life completely depends on, and I am looking forward to sharing those as well. I will wrap it all up in one script one day, and invite you into my world of CapsLock based bliss.
+## Miscellaneous
+I hope you find it helpful and please share any errors/improvements that you spot :)
 
-I have this GUI that I have now shared with you. The major things I have built in addition to the GUI are a window manager, a minimalistic password manager (which is actually integrated into the `¯\_(ツ)_/¯` GUI), and some indispensable mappings to the `uiojkl` keys so that you will never have to touch the arrow keys again. I use all of it all the time, and I hope I will be able to share it with you soon. 
+### Hints for own extensions
+- `;` is the comment keyword for `ahk` files
+- when using conditional statements such as `#If ...`, be aware that they affect the code across files. Use an empty `#If` to stop this.
 
-### Known bugs
-The english to korean Google Translate example does not currently work on the combination of Windows10 + Google Chrome. This is because everything after the `#` symbol in the URL is stripped. This is a bug in Chrome. It has nothing to do with AutoHotkey. The issue was reported here: https://code.google.com/p/chromium/issues/detail?id=514162#c5
 
-### Most recent changes
-##### December 30. 2015:
-Most significant change is to `url_search(url)` as a consequence of a re-introduced feature: Ability to search multiple URLs. Searching multiple URLs is now possible as so:
+### Inspiration
+- [ahkscript/awesome-AutoHotkey](https://github.com/ahkscript/awesome-AutoHotkey): A curated list of awesome AutoHotkey libraries, library distributions, scripts, tools and resources
+- [Forks](https://github.com/plul/Public-AutoHotKey-Scripts/network/members) of the original repo
 
-    else if Pedersen = m%A_Space% ; Open more than one URL
-    {
-        gui_search_title = multiple
-        gui_search("https://www.google.com/search?&q=REPLACEME")
-        gui_search("https://www.bing.com/search?q=REPLACEME")
-        gui_search("https://duckduckgo.com/?q=REPLACEME")
-    }
 
-Note that the syntax has changed with this update, where it used to be
-
-    gui_search_url := "https://www.youtube.com/results?search_query=REPLACEME"
-    gui_search()
-
-The url is now passed as a parameter instead:
-
-    gui_search("https://www.youtube.com/results?search_query=REPLACEME")
-
-Additionally, the tooltip was revived for Windows 10 and improved with the help of Github user schmimae.
+### Known Bugs
+- the shortcut lead keys `End` and `Home` sometimes get stuck

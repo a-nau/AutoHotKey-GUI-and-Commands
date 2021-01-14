@@ -8,14 +8,19 @@
 ; Write your own AHK commands in this file to be recognized by the GUI. Take inspiration from the samples provided here.
 
 ;-------------------------------------------------------------------------------
-;;; SEARCH GOOGLE ;;;
+;;; SEARCH ENGINES ;;;
 ;-------------------------------------------------------------------------------
 if Pedersen = g%A_Space% ; Search Google
 {
-    gui_search_title = LMGTFY
+    gui_search_title = Google Search
     gui_search("https://www.google.com/search?num=50&safe=off&site=&source=hp&q=REPLACEME&btnG=Search&oq=&gs_l=")
 }
-else if Pedersen = a%A_Space% ; Search Google for AutoHotkey related stuff
+else if Pedersen = d%A_Space% ; Search duckduckgo
+{
+    gui_search_title = Search duckduckgo
+    gui_search("https://duckduckgo.com/?q=REPLACEME")
+}
+else if Pedersen = ahk%A_Space% ; Search Google for AutoHotkey related stuff
 {
     gui_search_title = Autohotkey Google Search
     gui_search("https://www.google.com/search?num=50&safe=off&site=&source=hp&q=autohotkey%20REPLACEME&btnG=Search&oq=&gs_l=")
@@ -25,7 +30,7 @@ else if Pedersen = l%A_Space% ; Search Google with ImFeelingLucky
     gui_search_title = I'm Feeling Lucky
     gui_search("http://www.google.com/search?q=REPLACEME&btnI=Im+Feeling+Lucky")
 }
-else if Pedersen = m%A_Space% ; Open more than one URL
+else if Pedersen = s%A_Space% ; Open more than one URL
 {
     gui_search_title = multiple
     gui_search("https://www.google.com/search?&q=REPLACEME")
@@ -48,25 +53,54 @@ else if Pedersen = x%A_Space% ; Search Google as Incognito
 ;-------------------------------------------------------------------------------
 ;;; SEARCH OTHER THINGS ;;;
 ;-------------------------------------------------------------------------------
-else if Pedersen = f%A_Space% ; Search Facebook
-{
-    gui_search_title = Search Facebook
-    gui_search("https://www.facebook.com/search/results.php?q=REPLACEME")
-}
 else if Pedersen = y%A_Space% ; Search Youtube
 {
     gui_search_title = Search Youtube
     gui_search("https://www.youtube.com/results?search_query=REPLACEME")
 }
-else if Pedersen = t%A_Space% ; Search torrent networks
+else if Pedersen = m%A_Space% ; Search GoogleMaps
 {
-    gui_search_title = Sharing is caring
-    gui_search("https://kickass.to/usearch/REPLACEME")
+    gui_search_title = Search GoogleMaps
+    gui_search("https://maps.google.com/maps?q=REPLACEME")
 }
-else if Pedersen = kor ; Translate English to Korean
+else if Pedersen = I%A_Space% ; Google images
 {
-    gui_search_title = English to Korean
-    gui_search("https://translate.google.com/#en/ko/REPLACEME")
+    gui_search_title = Search Google Images
+    gui_search("https://www.google.com/search?tbm=isch&q=REPLACEME")
+}
+else if Pedersen = a%A_Space% ; Search Amazon.de
+{
+    gui_search_title = Search Amazon.de
+    gui_search("https://www.amazon.de/s?k=REPLACEME")
+}
+else if Pedersen = gs%A_Space% ; Google Scholar
+{
+    gui_search_title = Google Scholar
+    gui_search("https://scholar.google.com/scholar?q=REPLACEME")
+}
+else if Pedersen = teng ; Translate German to English
+{
+    gui_search_title = German to English
+    gui_search("https://translate.google.com/#de/en/REPLACEME")
+}
+else if Pedersen = tger ; Translate English to Germen
+{
+    gui_search_title = English to Germen
+    gui_search("https://translate.google.com/#en/de/REPLACEME")
+}
+else if Pedersen = w%A_Space% ; Search Weather
+{
+    gui_search_title = Weather 
+    gui_search("https://duckduckgo.com/?q=REPLACEME+wetter&t=ffab&ia=weather")
+}
+
+;-------------------------------------------------------------------------------
+;;; SEARCH LOCALLY ;;;
+;-------------------------------------------------------------------------------
+else if Pedersen = f%A_Space% ; Open  project folder
+{
+	gui_search_title = Find project folder
+	gui_projectsearch("REPLACEME")
 }
 
 
@@ -78,51 +112,19 @@ else if Pedersen = / ; Go to subreddit. This is a quick way to navigate to a spe
     gui_search_title := "/r/"
     gui_search("https://www.reddit.com/r/REPLACEME")
 }
-else if Pedersen = face ; facebook.com
+else if Pedersen = weather ; Weather Karlsruhe
 {
     gui_destroy()
-    run www.facebook.com
-}
-else if Pedersen = red ; reddit.com
-{
-    gui_destroy()
-    run www.reddit.com
-}
-else if Pedersen = cal ; Google Calendar
-{
-    gui_destroy()
-    run https://www.google.com/calendar
-}
-else if Pedersen = note ; Notepad
-{
-    gui_destroy()
-    Run Notepad
-}
-else if Pedersen = paint ; MS Paint
-{
-    gui_destroy()
-    run "C:\Windows\system32\mspaint.exe"
-}
-else if Pedersen = maps ; Google Maps focused on the Technical University of Denmark, DTU
-{
-    gui_destroy()
-    run "https://www.google.com/maps/@55.7833964`,12.5244754`,12z"
-}
-else if Pedersen = inbox ; Open google inbox
-{
-    gui_destroy()
-    run https://inbox.google.com/u/0/
-    ; run https://mail.google.com/mail/u/0/#inbox  ; Maybe you prefer the old gmail
-}
-else if Pedersen = mes ; Opens Facebook unread messages
-{
-    gui_destroy()
-    run https://www.facebook.com/messages?filter=unread&action=recent-messages
+    run "https://duckduckgo.com/?q=karlsruhe+wetter&t=ffab&ia=weather"
 }
 else if Pedersen = url ; Open an URL from the clipboard (naive - will try to run whatever is in the clipboard)
 {
     gui_destroy()
-    run %ClipBoard%
+	; see https://stackoverflow.com/a/5989317
+	If RegExMatch(Clipboard, "^(https?://|www\.)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?$")
+		Run %Clipboard%
+	Else
+		Run "https://www.google.com/search?num=50&safe=off&site=&source=hp&q=%Clipboard%&btnG=Search&oq=&gs_l="
 }
 
 
@@ -134,6 +136,11 @@ else if Pedersen = rel ; Reload this script
     gui_destroy() ; removes the GUI even when the reload fails
     Reload
 }
+else if Pedersen = flist ; show CSV with folders
+{
+    gui_destroy()
+    run, %TextEditor% "%A_ScriptDir%\Miscellaneous\folders.csv"
+}
 else if Pedersen = dir ; Open the directory for this script
 {
     gui_destroy()
@@ -142,12 +149,22 @@ else if Pedersen = dir ; Open the directory for this script
 else if Pedersen = host ; Edit host script
 {
     gui_destroy()
-    run, notepad.exe "%A_ScriptFullPath%"
+    run, %TextEditor% "%A_ScriptFullPath%"
 }
 else if Pedersen = user ; Edit GUI user commands
 {
     gui_destroy()
-    run, notepad.exe "%A_ScriptDir%\GUI\UserCommands.ahk"
+    run, %TextEditor% "%A_ScriptDir%\GUI\UserCommands.ahk"
+}
+else if Pedersen = shortcuts ; Edit Shortcuts Summary (Markdown)
+{
+    gui_destroy()
+    run, %TextEditor% "%A_ScriptDir%\Miscellaneous\Shortcuts.md"
+}
+else if Pedersen = getclass ; Show AHK class to use it for activation (only information)
+{
+    gui_destroy()
+	MsgBox, The active window's class is "%activeWindowClass%".	
 }
 
 
@@ -194,11 +211,6 @@ else if Pedersen = down ; Downloads
     gui_destroy()
     run C:\Users\%A_Username%\Downloads
 }
-else if Pedersen = drop ; Dropbox folder (works when it is in the default directory)
-{
-    gui_destroy()
-    run, C:\Users\%A_Username%\Dropbox\
-}
 else if Pedersen = rec ; Recycle Bin
 {
     gui_destroy()
@@ -214,10 +226,23 @@ else if Pedersen = ping ; Ping Google
     gui_destroy()
     Run, cmd /K "ping www.google.com"
 }
+else if Pedersen = mouse ; Show mouse position
+{
+	MouseGetPos,X,Y
+    gui_destroy()
+	Msgbox, Your Cursor is at X: %X% Y: %Y%
+}
+else if Pedersen = mscreen ; Show mouse position relative to screen
+{
+	CoordMode, Mouse, Window
+	MouseGetPos,X,Y
+    gui_destroy()
+	Msgbox, Your Cursor is at X: %X% Y: %Y%
+}
 else if Pedersen = hosts ; Open hosts file in Notepad
 {
     gui_destroy()
-    Run notepad.exe C:\Windows\System32\drivers\etc\hosts
+    Run %TextEditor% C:\Windows\System32\drivers\etc\hosts
 }
 else if Pedersen = date ; What is the date?
 {
