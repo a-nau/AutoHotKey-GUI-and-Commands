@@ -99,8 +99,8 @@ else if Pedersen = w%A_Space% ; Search Weather
 ;-------------------------------------------------------------------------------
 else if Pedersen = f%A_Space% ; Open  project folder
 {
-	gui_search_title = Find project folder
-	gui_projectsearch("REPLACEME")
+    gui_search_title = Find project folder
+    gui_projectsearch("REPLACEME")
 }
 
 
@@ -120,11 +120,11 @@ else if Pedersen = weather ; Weather Karlsruhe
 else if Pedersen = url ; Open an URL from the clipboard (naive - will try to run whatever is in the clipboard)
 {
     gui_destroy()
-	; see https://stackoverflow.com/a/5989317
-	If RegExMatch(Clipboard, "^(https?://|www\.)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?$")
-		Run %Clipboard%
-	Else
-		Run "https://www.google.com/search?num=50&safe=off&site=&source=hp&q=%Clipboard%&btnG=Search&oq=&gs_l="
+    ; see https://stackoverflow.com/a/5989317
+    If RegExMatch(Clipboard, "^(https?://|www\.)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?$")
+        Run %Clipboard%
+    Else
+        Run "https://www.google.com/search?num=50&safe=off&site=&source=hp&q=%Clipboard%&btnG=Search&oq=&gs_l="
 }
 
 
@@ -164,7 +164,7 @@ else if Pedersen = shortcuts ; Edit Shortcuts Summary (Markdown)
 else if Pedersen = getclass ; Show AHK class to use it for activation (only information)
 {
     gui_destroy()
-	MsgBox, The active window's class is "%activeWindowClass%".	
+    MsgBox, The active window's class is "%activeWindowClass%".    
 }
 
 
@@ -228,16 +228,16 @@ else if Pedersen = ping ; Ping Google
 }
 else if Pedersen = mouse ; Show mouse position
 {
-	MouseGetPos,X,Y
+    MouseGetPos,X,Y
     gui_destroy()
-	Msgbox, Your Cursor is at X: %X% Y: %Y%
+    Msgbox, Your Cursor is at X: %X% Y: %Y%
 }
 else if Pedersen = mscreen ; Show mouse position relative to screen
 {
-	CoordMode, Mouse, Window
-	MouseGetPos,X,Y
+    CoordMode, Mouse, Window
+    MouseGetPos,X,Y
     gui_destroy()
-	Msgbox, Your Cursor is at X: %X% Y: %Y%
+    Msgbox, Your Cursor is at X: %X% Y: %Y%
 }
 else if Pedersen = hosts ; Open hosts file in Notepad
 {

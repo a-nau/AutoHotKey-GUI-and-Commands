@@ -3,7 +3,7 @@ This folder contains standard shortcuts.
 
 ## Programs
 The [programs.ahk](./programs.ahk) contains shortcuts to open/activate various programs/applications.
-The current lead key is `End`, but that can be changed by a simply replacing `End` with the key of your choice in the entire file.
+The current lead key is `CAPSLOCK`, but that can be changed by a simply replacing `CAPSLOCK` with the key of your choice in the entire file.
 You can use the "replace all" functionality of your text editor for this.
 
 Since everyone uses different programs and paths might be different, I only left a few examples in the [programs.ahk](./programs.ahk), so you get an idea on how to use it.
@@ -23,12 +23,7 @@ To find the `ahk_class` of a given application:
 
 
 ## Screen Management
-The [screenManagement.ak](./screenManagement.ahk) contains shortcuts to make moving along the screen, switching between windows, etc. easier.
-The current lead key for this is `Home`.
-Change it by replacing `Home` with the key of your choice.
+The [screenManagement.ahk](./screenManagement.ahk) contains shortcuts to make moving along the screen, switching between windows, etc. easier.
+The current lead key for this is `CAPSLOCK`.
+Change it by replacing `CAPSLOCK` with the key of your choice.
 
-
-## Miscellaneous
-
-Since I use a special keyboard, `home`, `end`, `pg up` and `pg down` are very well suited as lead keys.
-For standard keyboards, however, you should change this configuration.

@@ -29,31 +29,31 @@ uriEncode(str) {
 ;-------------------------------------------------------------------------------
 
 WinOpenOrActivate(WinTitle, Target){
-	; https://www.autohotkey.com/docs/misc/WinTitle.htm#ahk_class
-	; https://autohotkey.com/board/topic/79159-run-application-if-not-active-activate-window-if-active/
+    ; https://www.autohotkey.com/docs/misc/WinTitle.htm#ahk_class
+    ; https://autohotkey.com/board/topic/79159-run-application-if-not-active-activate-window-if-active/
     IfWinExist, %WinTitle%
-		IfWinActive, %WinTitle%
-		{
-			WinMinimize %WinTitle% ; see http://ahkscript.org/docs/misc/WinTitle.htm#ActiveWindow
-			WinActivate, ahk_class Shell_TrayWnd
-		}
-		Else
-			WinActivate, %WinTitle%
-	else
-		Run, %Target%
+        IfWinActive, %WinTitle%
+        {
+            WinMinimize %WinTitle% ; see http://ahkscript.org/docs/misc/WinTitle.htm#ActiveWindow
+            WinActivate, ahk_class Shell_TrayWnd
+        }
+        Else
+            WinActivate, %WinTitle%
+    else
+        Run, %Target%
 }
 
 WinOpenOrActivateExe(Target){
     IfWinExist, ahk_exe %Target%
-		IfWinActive, ahk_exe %Target%
-		{
-			WinMinimize ahk_exe %Target% ; see http://ahkscript.org/docs/misc/WinTitle.htm#ActiveWindow
-			WinActivate, ahk_class Shell_TrayWnd
-		}
-		Else
-			WinActivate, ahk_exe %Target%
-	else
-		Run, %Target%
+        IfWinActive, ahk_exe %Target%
+        {
+            WinMinimize ahk_exe %Target% ; see http://ahkscript.org/docs/misc/WinTitle.htm#ActiveWindow
+            WinActivate, ahk_class Shell_TrayWnd
+        }
+        Else
+            WinActivate, ahk_exe %Target%
+    else
+        Run, %Target%
 }
 
 

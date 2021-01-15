@@ -5,16 +5,16 @@ Also check the original [readme](/Miscellaneous/README_original.md) for more inf
 
 ## [Why](https://www.lifehack.org/articles/featured/10-ways-to-use-autohotkey-to-rock-your-keyboard.html) use AHK? 
 
-Using your keyboard more and your mouse less improves your productivity, since it usually takes you much less time.
+Using your keyboard more and your mouse less can improve your productivity since it usually takes you much less time.
 
 Check the following Demo: Instead of 
-- using your mouse to opening FireFox, 
+- using your mouse to open FireFox, 
 - opening a new tab and 
 - typing `www.google.com`
 
 you just press 
-- `CAPSLOCK`+`SPACE` and then
-- `g`+`SPACE` 
+- `CAPSLOCK`+`SPACE` (to open the GUI) and then
+- `g`+`SPACE` (to select a Google Search)
 
 (the demo below also shows the `?` command that displays the available options) 
 
@@ -22,6 +22,8 @@ you just press
 
 
 ## Features
+
+### GUI
 There are numerous other features already implemented, ready to use! 
 Always first start the GUI with `CAPSLOCK`+`SPACE` and then choose:
 - Search dialogues to quickly search across different sites (always press the key and `SPACE` afterwards)
@@ -39,7 +41,9 @@ Always first start the GUI with `CAPSLOCK`+`SPACE` and then choose:
 - Translation (additional configuration/changes are possible)
     - `teng`: Translate from German to English
     - `tger`: Translate from English to German
-- Pasting of strings with `name`, `phone` (can configure anything)
+- Pasting 
+    - strings with `name`, `phone` (can configure anything)
+    - `CAPSLOCK`+`c`: current active browser tab link in Markdown format to the clipboard  
 - Opening of folders and files
     - `down`: opens Downloads folder
     - `f`+`SPACE`: opens dialog for shortcuts to folders (configuration in [`folders.csv`](/Miscellaneous/folders.csv))
@@ -52,8 +56,20 @@ Always first start the GUI with `CAPSLOCK`+`SPACE` and then choose:
     - `?`: overview of available commands
 
 
-In addition you can specify hot keys for applications in the directory [shortcuts](./shortcuts), that open applications when combining a lead key (default is `End`) with another key.
-For example `End` + `G` opens the windows file explorer.
+### Shortcuts
+All shortcuts (as the GUI) are triggered by the `CAPSLOCK` key.
+In addition you can specify hot keys for applications in the directory [shortcuts](./shortcuts), that open applications when combining the lead key `CAPSLOCK` with another key.
+For example 
+- `CAPSLOCK` + `1`: Switch to the neighboring desktop on the left
+- `CAPSLOCK` + `2`: Switch to the neighboring desktop on the right
+- `CAPSLOCK` + `g`: opens the windows file explorer
+- `CAPSLOCK` + `n`: centers the mouse over the active window
+- `CAPSLOCK` + `x`: closes the active application
+- ...
+
+In general, these examples are rather to give you some ideas on what is possible.
+If you like it, it is probably best to reconfigure those to suit your needs.
+
 
 ## Usage
 
@@ -63,16 +79,8 @@ To get started
 - install [AutoHotKey](https://autohotkey.com/download/) (AHK)
 - execute `Host.ahk` (by double clicking)
 
-Specify the path to your favorite
-- text editor (that opens all text files) in the variable [`TextEditor`](./GUI/GUI.ahk#L46) 
-- browser (that opens all searches and links) in the variable [`FireFoxExe`](./GUI/GUI.ahk#L47)
-
-To start the GUI use `CAPSLOCK + SPACE` and enter `?` to get an overview of available commands.
-Since `CAPSLOCK` is used as a special key, its standard usage is suppressed, but can be recovered using `ALT + CAPSLOCK`.
-
-In addition you can specify hot keys for applications and windows management in the directory [shortcuts](./shortcuts), where you find more details.
-The default lead keys are `Home` and `End`.
-To get back their original functionality you need to double press them.
+To start the GUI use `CAPSLOCK` + `SPACE` and enter `?` to get an overview of available commands.
+Since `CAPSLOCK` is used as a special key, its standard usage is suppressed, but can be recovered using `ALT` + `CAPSLOCK`.
 
 ## Credits
 Without the great original [repo](https://github.com/plul/Public-AutoHotKey-Scripts), this would not have been possible, since I am not a AHK expert.
@@ -106,8 +114,5 @@ I hope you find it helpful and please share any errors/improvements that you spo
 
 ### Inspiration
 - [ahkscript/awesome-AutoHotkey](https://github.com/ahkscript/awesome-AutoHotkey): A curated list of awesome AutoHotkey libraries, library distributions, scripts, tools and resources
+- [rcmdnk/vim_ahk](https://github.com/rcmdnk/vim_ahk): Setting file to emulate vim with AutoHotkey 
 - [Forks](https://github.com/plul/Public-AutoHotKey-Scripts/network/members) of the original repo
-
-
-### Known Bugs
-- the shortcut lead keys `End` and `Home` sometimes get stuck
