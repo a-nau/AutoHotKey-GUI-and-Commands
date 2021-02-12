@@ -43,7 +43,6 @@ Always first start the GUI with `CAPSLOCK`+`SPACE` and then choose:
     - `tger`: Translate from English to German
 - Pasting 
     - strings with `name`, `phone` (can configure anything)
-    - `CAPSLOCK`+`c`: current active browser tab link in Markdown format to the clipboard  
 - Opening of folders and files
     - `down`: opens Downloads folder
     - `f`+`SPACE`: opens dialog for shortcuts to folders (configuration in [`folders.csv`](/Miscellaneous/folders.csv))
@@ -58,13 +57,17 @@ Always first start the GUI with `CAPSLOCK`+`SPACE` and then choose:
 
 ### Shortcuts
 All shortcuts (as the GUI) are triggered by the `CAPSLOCK` key.
-In addition you can specify hot keys for applications in the directory [shortcuts](./shortcuts), that open applications when combining the lead key `CAPSLOCK` with another key.
-For example 
+You can specify hot keys for applications [here](./shortcuts/programs.ahk). For example 
+- `CAPSLOCK` + `g`: opens the windows file explorer
+- `CAPSLOCK` + `w`: opens the MS Word
+- ...
+
+Additional shortcuts are for screen management and other stuff, for example
 - `CAPSLOCK` + `1`: Switch to the neighboring desktop on the left
 - `CAPSLOCK` + `2`: Switch to the neighboring desktop on the right
-- `CAPSLOCK` + `g`: opens the windows file explorer
 - `CAPSLOCK` + `n`: centers the mouse over the active window
 - `CAPSLOCK` + `x`: closes the active application
+- `CAPSLOCK` + `c`: copy current active browser tab link in Markdown format to the clipboard (currently only works with FireFox, but can be changed [here](./shortcuts/screenManagement.ahk#L49))
 - ...
 
 In general, these examples are rather to give you some ideas on what is possible.
@@ -75,12 +78,16 @@ If you like it, it is probably best to reconfigure those to suit your needs.
 
 If you are new to AHK, check out the following [description](https://en.wikipedia.org/wiki/AutoHotkey) and short [tutorial](https://www.autohotkey.com/docs/Tutorial.htm).
 
-To get started
-- install [AutoHotKey](https://autohotkey.com/download/) (AHK)
+To get it up and running
+- install [AutoHotKey](https://autohotkey.com/download/) (AHK) version 1 (not v2 beta) and then
 - execute `Host.ahk` (by double clicking)
 
-To start the GUI use `CAPSLOCK` + `SPACE` and enter `?` to get an overview of available commands.
-Since `CAPSLOCK` is used as a special key, its standard usage is suppressed, but can be recovered using `ALT` + `CAPSLOCK`.
+Afterwards to start using it 
+- press `CAPSLOCK` + `SPACE` to start the GUI and enter `?` to get an overview of available commands.
+- **Note**: Since `CAPSLOCK` is used as a special key, its standard usage is suppressed, but can be recovered using `ALT` + `CAPSLOCK`.
+
+If you have any issues, or if you changed some configuration, simply reload the `Host.ahk` file by double clicking or using the GUI with `CAPSLOCK` + `SPACE` and typing `rel`.
+In addition, consider pasting a link (`.lnk` file) to the `Host.ahk` into the Windows auto-start folder (see [here](https://support.microsoft.com/en-us/windows/add-an-app-to-run-automatically-at-startup-in-windows-10-150da165-dcd9-7230-517b-cf3c295d89dd) for instructions) to automatically load the script on start up.
 
 ## Credits
 Without the great original [repo](https://github.com/plul/Public-AutoHotKey-Scripts), this would not have been possible, since I am not a AHK expert.
@@ -108,6 +115,14 @@ In addition to that I added:
 I hope you find it helpful and please share any errors/improvements that you spot :)
 
 ### Hints for own extensions
+
+AHK scripts use the following [common notation](https://www.autohotkey.com/docs/Hotkeys.htm) 
+- `^` = `CRTL`
+- `#` = `WINDOWS`
+- `+` = `SHIFT`
+- `!` = `ALT`
+
+Furthermore,
 - `;` is the comment keyword for `ahk` files
 - when using conditional statements such as `#If ...`, be aware that they affect the code across files. Use an empty `#If` to stop this.
 
