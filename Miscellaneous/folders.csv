@@ -6,3 +6,4 @@ code,C:\code
 docs,C:\docs
 data,C:\data
 dev,C:\dev
+ahk,"C:\Program Files\Microsoft VS Code\Code.exe C:\dev\AutoHotKey-GUI-and-Commands"

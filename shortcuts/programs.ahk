@@ -11,8 +11,12 @@
 ;-------------------------------------------------------------------------------
 ; Specify Application shortcuts here
 ;-------------------------------------------------------------------------------
-CapsLock & f::WinOpenOrActivateExe("C:\Program Files\Mozilla Firefox\firefox.exe")
+CapsLock & f::WinOpenOrActivateExe("C:\Program Files\Google\Chrome\Application\chrome.exe")
 CapsLock & g::WinOpenOrActivate("ahk_class CabinetWClass", "explorer")
-CapsLock & t::WinOpenOrActivateExe("C:\Program Files\Mozilla Thunderbird\thunderbird.exe")
-CapsLock & w::WinOpenOrActivate("ahk_class OpusApp", "WINWORD")
+CapsLock & i::WinOpenOrActivateExe("C:\Program Files\Microsoft VS Code\Code.exe")
+CapsLock & s::run "https://www.perplexity.ai/"
+; outlook
+CapsLock & e::WinOpenOrActivate("ahk_class rctl_renwnd32", "outlook")
+
+
 
