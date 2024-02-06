@@ -31,6 +31,8 @@ CapsLock & 1::
 ; move windows across monitors
 CapsLock & Left::#+Left
 CapsLock & Right::#+Right
+CapsLock & Up::#Up
+CapsLock & Down::#Down
     
     
 ;-------------------------------------------------------------------------------

@@ -20,3 +20,21 @@ CapsLock & e::WinOpenOrActivate("ahk_class rctl_renwnd32", "outlook")
 
 
 
+; VS Code
+#If WinActive("ahk_exe C:\Program Files\Microsoft VS Code\Code.exe")
+{
+    CapsLock & 6::^+e  ; switch/open editor
+    CapsLock & 7::^+e  ; switch/open explorer/project files
+    CapsLock & 8::^+g  ; switch/open git
+    CapsLock & 9::^`  ; switch/open terminal
+    CapsLock & 0::^+f  ; switch/open terminal
+
+    CapsLock & r::  ; switch to Chrome and refresh
+        WinOpenOrActivateExe("C:\Program Files\Google\Chrome\Application\chrome.exe")
+        Sleep 100
+        Send {F5}  ; refresh
+        Sleep 100
+        WinOpenOrActivateExe("C:\Program Files\Microsoft VS Code\Code.exe")
+        return
+}
+#If

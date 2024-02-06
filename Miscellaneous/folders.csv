@@ -3,7 +3,7 @@ programs,C:\Program Files
 programsx,C:\Program Files (x86)
 d,D:\
 code,C:\code
-docs,C:\docs
+docs,"C:\Users\anaumann\OneDrive - NVIDIA Corporation\Documents"
 data,C:\data
 dev,C:\dev
 ahk,"C:\Program Files\Microsoft VS Code\Code.exe C:\dev\AutoHotKey-GUI-and-Commands"
