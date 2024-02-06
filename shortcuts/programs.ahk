@@ -17,6 +17,7 @@ CapsLock & i::WinOpenOrActivateExe("C:\Program Files\Microsoft VS Code\Code.exe"
 CapsLock & s::run "https://www.perplexity.ai/"
 ; outlook
 CapsLock & e::WinOpenOrActivate("ahk_class rctl_renwnd32", "outlook")
+CapsLock & v::WinOpenOrActivateExe("C:\Program Files\Microsoft VS Code\Code.exe")
 
 
 
