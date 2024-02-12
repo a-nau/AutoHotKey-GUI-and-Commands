@@ -17,6 +17,7 @@ CapsLock & i::WinOpenOrActivateExe("C:\Program Files\Microsoft VS Code\Code.exe"
 CapsLock & s::run "https://www.perplexity.ai/"
 ; outlook
 CapsLock & e::WinOpenOrActivate("ahk_class rctl_renwnd32", "outlook")
+CapsLock & t::WinOpenOrActivate("ahk_class CASCADIA_HOSTING_WINDOW_CLASS", "Windows Powershell")
 CapsLock & v::WinOpenOrActivateExe("C:\Program Files\Microsoft VS Code\Code.exe")
 
 
@@ -36,6 +37,12 @@ CapsLock & v::WinOpenOrActivateExe("C:\Program Files\Microsoft VS Code\Code.exe"
         Send {F5}  ; refresh
         Sleep 100
         WinOpenOrActivateExe("C:\Program Files\Microsoft VS Code\Code.exe")
+        return
+
+    CapsLock & w::  ; switch to Chrome and refresh
+        Send, ^w ; This sends Ctrl+W
+        Sleep, 100 ; Waits for 100 milliseconds to ensure the first command is processed
+        Send, w ; This sends the W key
         return
 }
 #If
