@@ -33,6 +33,9 @@ CapsLock & Left::#+Left
 CapsLock & Right::#+Right
 CapsLock & Up::#Up
 CapsLock & Down::#Down
+
+CapsLock & z::Send {XButton1}
+CapsLock & a::Send {XButton2}
     
     
 ;-------------------------------------------------------------------------------
