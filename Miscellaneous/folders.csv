@@ -6,4 +6,5 @@ code,C:\code
 docs,"C:\Users\anaumann\OneDrive - NVIDIA Corporation\Documents"
 data,C:\data
 dev,C:\dev
-ahk,"C:\Program Files\Microsoft VS Code\Code.exe" "C:\Users\anaumann\OneDrive - NVIDIA Corporation\dev\AutoHotKey-GUI-and-Commands"
+ahk,"'C:\Program Files\Microsoft VS Code\Code.exe' 'C:\Users\anaumann\OneDrive - NVIDIA Corporation\dev\AutoHotKey-GUI-and-Commands'"
+wf,"https://maglev.nvda.ai/ide/workflows?name=anaumann&sort=started_at&sort_dir=desc"
